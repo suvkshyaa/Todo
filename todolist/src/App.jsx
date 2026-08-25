@@ -31,28 +31,36 @@ function App() {
   };
 
   return (
-  <div>
+  <div className="app-container">
+    <h1 className="app-title">My Tasks</h1>
 
-    <input
-      type = "text"
-      value = {inputText}
-      onChange = {(e) => setInputText(e.target.value)}
-      placeholder = "Add a new task"
-    />
-    
-    <button onClick = {handleAddTodo}>Add</button>
-    
-    <ul>
-        {todos.map(todo => (
-          <li key = {todo.id}>
-            {todo.name} - {todo.completed ? 'completed' : 'not completed'}
-            <button onClick = {() => handleDeleteTodo(todo.id)}>Delete</button>
-            <button onClick = {() => handleToggleComplete(todo.id)}>Toggle</button>
-          </li>
-        ))}
-      </ul>
+    <div className="input-row">
+      <input
+        type="text"
+        value={inputText}
+        onChange={(e) => setInputText(e.target.value)}
+        placeholder="Add a new task"
+        className="task-input"
+      />
+      <button onClick={handleAddTodo} className="add-button">Add</button>
     </div>
-  );
+
+    <ul className="task-list">
+      {todos.map(todo => (
+        <li key={todo.id} className="task-item">
+          <span
+            onClick={() => handleToggleComplete(todo.id)}
+            className={todo.completed ? "task-text completed" : "task-text"}
+          >
+            {todo.name}
+          </span>
+          <button onClick={() => handleDeleteTodo(todo.id)} className="delete-button">Delete</button>
+        </li>
+      ))}
+    </ul>
+  </div>
+);
+
 
 }
 export default App;
